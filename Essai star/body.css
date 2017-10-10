@@ -1,0 +1,14 @@
+body
+{
+  /*Le body rempli toute la hauteur et la largeur disponible de la page*/
+  width: 100%;
+  height: 100%;
+  background-image: url("image/fond_etoiles.jpg");
+  margin: 0;
+  /*Pour éviter l'apparition de la scroll bar car on va devoir positionner du contenu hors de l'écran pour l'animation du texte défilant.*/
+  overflow: hidden;
+  /*centrage des éléments contenu dans le body avec flexbox*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
