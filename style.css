@@ -1,70 +1,97 @@
-body
+html, body
 {
   /*Le body rempli toute la hauteur et la largeur disponible de la page*/
   width: 100%;
   height: 100%;
   background-image: url("image/fond_etoiles.jpg");
+  margin: 0;
+  /*Pour éviter l'apparition de la scroll bar car on va devoir positionner du contenu hors de l'écran pour l'animation du texte défilant.*/
+  overflow: hidden;
   /*centrage des éléments contenu dans le body avec flexbox*/
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#page
-{
-  margin:auto;
-}
 
-/*.il_y_a_longtemps
-{
-  width: 750px;
-  margin:auto;
-  display: hidden;
-}
 
-.il_y_a_longtemps p
+/*Phrase d'introduction avant l'apparition du texte défilant*/
+.il_y_a_longtemps
 {
   font-family: Impact, Helvetica, Arial, sans-serif;
   color: #ffcf64;
   font-weight: bolder;
   font-size: 50px;
-  text-align: left;
-}*/
-.texte_defilant img
-{
-  width: 200px;
-  display: block;
-  margin: auto;
-}
 
-.texte_defilant p
-{
-  font-family: Impact, Helvetica, Arial, sans-serif;
-  color: #ffcf64;
-  font-weight: bolder;
-  font-size: 50px;
-  text-align: justify;
-}
-
-.texte_defilant
-{
+  /*Animation provoquant une animation et disparition progressive du texte d'intro*/
   /*le texte est transparent au départ*/
   opacity: 0;
   /*animation delay définit le temps avant de démarrer l'animation*/
   animation-delay: 1s;
   /*animation-duration définit le temps que va durer l'animation*/
-  animation-duration: 1s;
+  animation-duration: 2s;
   /*animation-name est le nom de l'animation pour pouvoir l'appeler quand on aura déterminer les étapes clefs de l'animation et ce qui se passe à chaque étape*/
-  animation-name: texte_defilant;
+  animation-name: texte_intro;
   /*animation-timing-fonction définit la manière dont l'animation va se dérouler - ease-out signifie qu'elle démarre puis se termine lentement. Avec une anim sur l'opacité cela donne un effet de fondu.*/
   animation-timing-function: ease-out;
 }
 
-/*Definit ce qui va réellement se passer durant l'animation à chaque étape clefs ici 0%, 20% 80% 100%*/
-@keyframes texte_defilant {
+/*Definit étape par étape comment l'animation va affecter le texte d'intro à chaque étape clefs ici 0%, 20% 80% 100%*/
+@keyframes texte_intro {
+    /*Animation provoquant une animation et disparition progressive du contenu*/
+    /*Au départ l'opacité de 0 - totalement transparent*/
     0%   { opacity: 0; }
+    /*A 20% de l'animation opacité de 1 - totalement visible*/
     20%  { opacity: 1; }
+    /*A 20% de l'animation opacité de 1 - reste totalement visible*/
     80%  { opacity: 1; }
+    /*A la fin de l'animation opacité de 0 - l'animation se termine avec le contenu transparent (invisible)*/
     100% { opacity: 0; }
+  }
 
-transform: perspective(280px) rotateX(25deg);
+
+/*----------------Partie texte défilant--------------------*/
+.crawl {
+    /* centrage de l'élément' */
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 800px;
+    margin: 0 0 0 -400px;
+    top: auto;
+    bottom: 0;
+    height: 50em;
+    /* cosmétique */
+    color: #ffff66;
+    font-size: 64px;
+    text-align: justify;
+    /* Applique la transformation  */
+    transform-origin: center bottom;
+    transform: perspective(300px) rotateX(25deg);
+}
+
+.crawl > div {
+    /* positionne la div en bas de l'écran (non visible) */
+    /* l'animation la fait remonter progressivement */
+    position: absolute;
+    top: 100%;
+    animation-delay: 3s; /* Démarre l'animation après la première */
+    animation-duration: 20s;
+    animation-name: crawl;
+    animation-timing-function: linear;
+}
+
+@keyframes crawl {
+    0% {
+        top: 100%;
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1; /* disparition progressive à la fin */
+    }
+
+    100% {
+        top: 0;
+        opacity: 0;
+    }
 }

@@ -1,0 +1,72 @@
+/*---------------Partie concernant le texte défilant-----------------*/
+.texte_defilant img
+{
+  /*Positionnement du logo becode en haut du texte et centré*/
+  width: 200px;
+  display: block;
+  margin: auto;
+  Indique ce qui serait le padding-left selon le sens d'orientation du bloc (horizontal ou vertical)
+  padding-block-end: 10px;
+}
+
+.texte_defilant p
+{
+  font-family: Impact, Helvetica, Arial, sans-serif;
+  color: #ffcf64;
+  font-weight: bolder;
+  font-size: 50px;
+  text-align: justify;
+}
+
+.texte_defilant
+{
+  /*On centre le texte défilant dans la page*/
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 800px;
+  /*On lui applique un margin-left de -400px, les autres marges sont fixées à 0- l'élément sera donc décallé vers la droite de 400px*/
+  margin: 0 0 0 -400px;
+  top: auto;
+  bottom: 0;
+  height: 50em;
+  /*On applique la transformation dont l'origine est au centre en bas. On applique ensuite une perspective de 300px et une rotation sur l'axe des X de 25 degrès*/
+  transform-origin: center bottom;
+  transform: perspective(300px) rotateX(25deg);
+}
+
+/*On indique la position de départ de l'animation et on lui donne un nom et le type d'animation que l'on désire*/
+.crawl > div {
+    /* positionne la div en bas de l'écran (non visible) */
+    /* l'animation la fait remonter progressivement */
+    position: absolute;
+    /*la div est placée juste sous l'écran*/
+    top: 100%;
+    /*La première animation débutait à 1s, en indiquant 2s pour cette animation, on vait débuter le texte défilant juste après l'affichage du texte d'intro*/
+    animation-delay: 2s;
+    /*l'animation va durer 20secondes*/
+    animation-duration: 20s;
+    animation-name: defilant;
+    /*l'animation est de type lineaire, c'est à dire pas d'accélération au début ou à la fin*/
+    animation-timing-function: linear;
+}
+
+/*On définit ce qui va se passer au différentes étapes de l'animation du texte défilant*/
+@keyframes crawl {
+  /*Au début, la div se situe juste sous l'écran avec le top à 100% et une opacité de 1 (totalement visible)*/
+    0% {
+        top: 100%;
+        opacity: 1;
+    }
+
+/*A 80% de l'animation, la div a remonté vers le haut de l'écran et est totalement visible*/
+    80% {
+        opacity: 1; /* disparition progressive à la fin */
+    }
+
+/*A la fin de l'animation, la div est tout en haut de l'écran et est devenue transparente (invisible) avec une opacité de 0*/
+    100% {
+        top: 0;
+        opacity: 0;
+    }
+}
