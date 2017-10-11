@@ -5,9 +5,9 @@ html, body
   height: 100%;
   background-image: url("image/fond_etoiles.jpg");
   margin: 0;
-  /*Pour éviter l'apparition de la scroll bar car on va devoir positionner du contenu hors de l'écran pour l'animation du texte défilant.*/
-  overflow: hidden;
-  /*centrage des éléments contenu dans le body avec flexbox*/
+  /*Pour éviter l'apparition de la scroll bar car on va devoir positionner le texte défilant hors de l'écran pour l'animation et on veut que le texte reste caché jusqu'à son défilement.*/
+  overflow: hidden;/*Tout ce qui dépasse de l'écran visible est caché*/
+  /*centrage vertical et horizontal des éléments contenu dans le body avec flexbox*/
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,9 +17,9 @@ html, body
 /*Phrase d'introduction avant l'apparition du texte défilant*/
 .il_y_a_longtemps
 {
-  font-family: Impact, Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, Impact, sans-serif;
   color: #ffcf64;
-  font-weight: bolder;
+  /*font-weight: bold;*/
   font-size: 50px;
 
   /*Animation provoquant une animation et disparition progressive du texte d'intro*/
@@ -53,15 +53,16 @@ html, body
 .crawl {
     /* centrage de l'élément' */
     position: absolute;
-    top: 45%;
-    left: 50%;
-    width: 800px;
+    top: 45%;/*Positionnement du texte à 45% par rapport au dessus de l'écan, environ au milieu horizontalement de l'écran*/
+    left: 50%;/*Positionnement du texte à la moitié horizontale de l'écran*/
+    width: 800px;/*Largeur du bloc contenant le texte*/
     margin: 0 0 0 -400px;
     top: auto;
     bottom: 0;
     height: 50em;
     /* cosmétique */
-    color: #ffff66;
+    font-family: Helvetica, Arial, Impact, sans-serif;
+    color: #ffcf64;
     font-size: 64px;
     text-align: justify;
     /* Applique la transformation  */
