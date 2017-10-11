@@ -4,7 +4,7 @@ html, body
   width: 100%;
   height: 100%;
   background-image: url("image/fond_etoiles.jpg");
-  margin: 0;
+  margin: 0;/*On supprime les marges sur tout les côtés*/
   /*Pour éviter l'apparition de la scroll bar car on va devoir positionner le texte défilant hors de l'écran pour l'animation et on veut que le texte reste caché jusqu'à son défilement.*/
   overflow: hidden;/*Tout ce qui dépasse de l'écran visible est caché*/
   /*centrage vertical et horizontal des éléments contenu dans le body avec flexbox*/
@@ -50,49 +50,49 @@ html, body
 
 
 /*----------------Partie texte défilant--------------------*/
-.crawl {
+.defilant {
     /* centrage de l'élément' */
     position: absolute;
     top: 45%;/*Positionnement du texte à 45% par rapport au dessus de l'écan, environ au milieu horizontalement de l'écran*/
     left: 50%;/*Positionnement du texte à la moitié horizontale de l'écran*/
     width: 800px;/*Largeur du bloc contenant le texte*/
-    margin: 0 0 0 -400px;
-    top: auto;
-    bottom: 0;
-    height: 50em;
+    margin: 0 0 0 -400px;/*On applique un margin-left de -400px, les autres marges sont fixées à 0 - le texte sera donc décallé vers la droite de 400px*/
+    top: auto;/*position par défaut - aligne sur le bord supérieur de l'écran*/
+    bottom: 0;/*Permet avec la position absolute de "coller" le contenu au bas de la page*/
+    height: 50em;¨/*fixe la hauteur du bloc à 50em*/
     /* cosmétique */
     font-family: Helvetica, Arial, Impact, sans-serif;
     color: #ffcf64;
-    font-size: 64px;
-    text-align: justify;
+    font-size: 64px;/*fixe la taille de la police*/
+    text-align: justify;/*alignement justifié du texte*/
     /* Applique la transformation  */
-    transform-origin: center bottom;
-    transform: perspective(300px) rotateX(25deg);
+    transform-origin: center bottom;/*on applique la transformation à partir du centre et du bas du bloc*/
+    transform: perspective(300px) rotateX(25deg);/*On applique un effet de perspective de 300px et une rotation de 25 degre pour donner l'impression que le bloc texte est en 3D*/
 }
 
-.crawl > div {
+.defilant > div {
     /* positionne la div en bas de l'écran (non visible) */
     /* l'animation la fait remonter progressivement */
-    position: absolute;
-    top: 100%;
-    animation-delay: 3s; /* Démarre l'animation après la première */
-    animation-duration: 20s;
-    animation-name: crawl;
-    animation-timing-function: linear;
+    position: absolute;/*On met le bloc en position absolue*/
+    top: 100%;/*Au départ on met le top à 100% donc la div contenant le texte est placé sous le bas de l'écran visible, on ne le voit pas grâce à overflow;hidden placer sur la div defilant parent*/
+    animation-delay: 3s; /* Démarre l'animation du texte défilant après l'affichage du texte d'intro durant 2secondes, donc anim commence à la troisième seconde */
+    animation-duration: 20s;/*l'animation du texte défilant durera 20 secondes*/
+    animation-name: defilant;/*le nom de l'animation pour pouvoir y faire reférence dans @keyframe*/
+    animation-timing-function: linear;/*l'animation se déroulera de manière linéaire donc pas d'accélération au début ou à la fin, comme avec un ease-in ou ease-out*/
 }
 
-@keyframes crawl {
-    0% {
-        top: 100%;
-        opacity: 1;
+@keyframes defilant {
+    0% { /*Au début de l'animation*/
+        top: 100%;/*la position du bloc texte est juste sous l'écran visible*/
+        opacity: 1;/*L'opacité est compléte, on voit totalement le texte*/
     }
 
-    80% {
-        opacity: 1; /* disparition progressive à la fin */
+    80% {/*A environ 2/3 du déroulement de l'animation soit au bout de 16 secondes (animation complète dure 20 secondes) */
+        opacity: 1; /* l'opacité du texte est toujours complète */
     }
 
-    100% {
-        top: 0;
-        opacity: 0;
+    100% {/*A la fin de l'animation soit au bout de 20 secondes*/
+        top: 0;/*le texte sera totalement remonté vers le haut de l'écran en tenant compte de la déformation 3D qu'on lui appliqué*/
+        opacity: 0;/*Le texte va passé progressivement de l'état totalement visible (opacité 1 à la 16e seconde (80%)) à totalement transparent à la fin de l'animation (opacity: 0 à la 20e seconde (100%)) */
     }
 }
